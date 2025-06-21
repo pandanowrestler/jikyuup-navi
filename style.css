@@ -1,0 +1,227 @@
+/* 全体的なスタイル設定 */
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* 見やすいフォントを設定 */
+    line-height: 1.6; /* 行の高さを調整 */
+    margin: 0; /* body要素のデフォルトマージンをなくす */
+    padding: 20px; /* 全体の余白 */
+    background-color: #f4f7f6; /* 背景色 */
+    color: #333; /* 文字色 */
+    display: flex; /* Flexboxを使って中央寄せ */
+    flex-direction: column; /* 縦並び */
+    align-items: center; /* 水平方向の中央寄せ */
+}
+
+/* メインコンテンツの最大幅を設定 */
+main {
+    max-width: 800px; /* コンテンツの最大幅 */
+    width: 100%; /* 幅を100%にする（レスポンシブ対応） */
+    background-color: #ffffff; /* メインコンテンツの背景色 */
+    padding: 30px; /* 内側の余白 */
+    border-radius: 8px; /* 角を丸くする */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 影をつける */
+}
+
+/* ヘッダー */
+header {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+header h1 {
+    color: #2c3e50;
+    font-size: 2.2em;
+    margin: 0;
+}
+
+/* ヒーローセクション（メインビジュアル＆キャッチコピー） */
+.hero {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+    background-color: #e0f2f7;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.hero h2 {
+    color: #2980b9;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* 計算エリア */
+.calculation-area {
+    margin-bottom: 40px;
+    text-align: center; /* 中央寄せ */
+}
+
+.calculation-area h3 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left; /* ラベルと入力欄は左寄せ */
+    max-width: 400px; /* 入力欄の最大幅 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-group label {
+    display: block; /* ラベルをブロック要素にして改行 */
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+}
+
+.input-group input[type="number"] {
+    width: calc(100% - 20px); /* パディング分を考慮 */
+    padding: 12px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1em;
+    box-sizing: border-box; /* パディングとボーダーを幅に含める */
+}
+
+/* 計算ボタン */
+#calculateButton {
+    background-color: #28a745; /* ボタンの色 */
+    color: white;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* ホバー時のアニメーション */
+    margin-top: 15px;
+}
+
+#calculateButton:hover {
+    background-color: #218838; /* ホバー時の色 */
+}
+
+/* 結果表示エリア */
+.result-area {
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.result-area p {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.hourly-wage {
+    font-size: 2.5em; /* 時給を大きく表示 */
+    font-weight: bold;
+    color: #e74c3c; /* 時給の色 */
+    margin-top: 10px;
+    margin-bottom: 15px !important; /* 上書き */
+}
+
+.note {
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* 区切り線 */
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+    margin: 40px 0;
+}
+
+/* 時短提案エリア */
+.suggestion-area {
+    text-align: center; /* タイトルと説明を中央寄せ */
+    margin-bottom: 50px;
+}
+
+.suggestion-area h3 {
+    color: #2c3e50;
+    font-size: 1.6em;
+    margin-bottom: 10px;
+}
+
+.suggestion-area p {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* 時短アイテムリストのコンテナ */
+.item-list {
+    display: flex; /* Flexboxで横並び */
+    flex-wrap: wrap; /* 画面幅が狭い場合は折り返す */
+    gap: 25px; /* アイテム間の隙間 */
+    justify-content: center; /* アイテムを中央寄せ */
+}
+
+/* 各時短アイテムのスタイルはJavaScriptで生成されるので、ここでは定義しない */
+
+/* フッター */
+footer {
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    color: #777;
+    font-size: 0.9em;
+}
+
+/* スマートフォン向け調整（メディアクエリ） */
+@media (max-width: 768px) {
+    body {
+        padding: 10px; /* 画面が狭い場合は余白を減らす */
+    }
+
+    main {
+        padding: 20px;
+        border-radius: 0; /* スマホでは角丸をなくしても良い */
+        box-shadow: none; /* スマホでは影をなくしても良い */
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .hero h2 {
+        font-size: 1.5em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .calculation-area h3 {
+        font-size: 1.3em;
+    }
+
+    .hourly-wage {
+        font-size: 2em; /* スマホでは少し小さく */
+    }
+
+    .suggestion-area h3 {
+        font-size: 1.4em;
+    }
+
+    .item-list {
+        flex-direction: column; /* スマホでは縦並び */
+        align-items: center; /* 中央寄せ */
+    }
+}

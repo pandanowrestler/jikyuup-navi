@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>時給UPナビ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>時給UPナビ</h1>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>あなたの時間は、いくら？</h2>
+            <p>無駄な時間を未来への投資に変えませんか？</p>
+        </section>
+
+        <section class="calculation-area">
+            <h3>あなたの「今の時給」を計算してみよう！</h3>
+            <div class="input-group">
+                <label for="annualIncome">年収（円）:</label>
+                <input type="number" id="annualIncome" placeholder="例: 4000000">
+            </div>
+            <div class="input-group">
+                <label for="workHours">年間労働時間（時間、残業含む概算）:</label>
+                <input type="number" id="workHours" placeholder="例: 2000">
+            </div>
+            <button id="calculateButton">計算する</button>
+
+            <div class="result-area">
+                <p>あなたの今の時給は...</p>
+                <p class="hourly-wage" id="hourlyWageResult">0円</p>
+                <p class="note">※これは労働に対する対価です。しかし、家事や余暇の時間もあなたの人生の貴重な時間です。</p>
+            </div>
+        </section>
+
+        <hr> <section class="suggestion-area">
+            <h3>生まれる余暇で、未来の時給UP！</h3>
+            <p>無駄をなくして、あなたの時間を投資に変えましょう。</p>
+
+            <div id="itemSuggestions" class="item-list">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 時給UPナビ All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
