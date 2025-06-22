@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【公式】時給UPナビ | あなたの時間を価値に変え、未来の時給を上げる</title> <meta name="description" content="年収と労働時間からあなたの時給を計算し、家事の時短がどれだけ将来のスキルアップや資産形成につながるかを可視化します。無駄な時間をお金に変えるヒントが満載！"> <link rel="stylesheet" href="style.css">
+    <title>【公式】時給UPナビ | あなたの時間を価値に変え、未来の時給を上げる</title>
+    <meta name="description" content="年収と労働時間からあなたの時給を計算し、家事の時短がどれだけ将来のスキルアップや資産形成につながるかを可視化します。無駄な時間をお金に変えるヒントが満載！">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta property="og:title" content="時給UPナビ">
     <meta property="og:description" content="無駄な時間を未来への投資に変えよう。">
     <meta property="og:type" content="website">
@@ -11,50 +14,134 @@
     <meta property="og:image" content="https://your-github-username.github.io/jikyu-up-navi/ogp_image.jpg"> <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="時給UPナビ">
     <meta name="twitter:description" content="無駄な時間を未来への投資に変えよう。">
-    <meta name="twitter:image" content="https://your-github-username.github.io/jikyu-up-navi/twitter_image.jpg">
-</head>
+    <meta name="twitter:image" content="https://your-github-username.github.io/jikyu-up-navi/twitter_image.jpg"> </head>
 <body>
-    <header>
-        <h1>時給UPナビ</h1>
-    </header>
-
     <main>
+        <header>
+            <h1>時給UPナビ</h1>
+        </header>
+
         <section class="hero">
-            <h2>あなたの時間は、いくら？</h2>
-            <p>無駄な時間を未来への投資に変えませんか？</p>
+            <h2>あなたの「時給」、意識していますか？</h2>
+            <p>年収と労働時間からあなたの時給を計算し、家事の時短がどれだけ未来の時給アップや資産形成につながるかを可視化します。<br>無駄な時間をお金に変えるヒントがここにあります！</p>
         </section>
 
+        <hr>
+
         <section class="calculation-area">
-            <h3>あなたの「今の時給」を計算してみよう！</h3>
+            <h3>あなたの時給を計算</h3>
             <div class="input-group">
-                <label for="annualIncome">年収（円）:</label>
-                <input type="number" id="annualIncome" placeholder="例: 4000000">
+                <label for="monthlySalary">月給（額面、円）:</label>
+                <input type="number" id="monthlySalary" placeholder="例: 300000" min="0">
             </div>
+
+            <div class="bonus-inputs" id="bonusInputsContainer">
+                </div>
+            <button id="addBonusButton" class="add-button">ボーナスを追加</button>
+
             <div class="input-group">
-                <label for="workHours">年間労働時間（毎日9時間労働で、土日祝休みなら2,205時間が目安）:</label>
-                <input type="number" id="workHours" placeholder="例: 2000">
+                <label for="workHours">年間労働時間（時間、残業含む概算）:</label>
+                <input type="number" id="workHours" placeholder="例: 2000" min="0">
+            </div>
+
+            <div class="input-group">
+                <label for="lifestyle">あなたのライフスタイル:</label>
+                <select id="lifestyle">
+                    <option value="single">独身・一人暮らし</option>
+                    <option value="couple">夫婦二人暮らし</option>
+                    <option value="family_young">夫婦＋子供あり（未就学児）</option>
+                    <option value="family_old">夫婦＋子供あり（小中高生）</option>
+                    <option value="other">その他／自分では判断が難しい</option>
+                </select>
+            </div>
+            
+            <div class="chores-input-area">
+                <h3>週の家事時間入力</h3>
+                <p class="section-description">あなたのライフスタイルと普段の家事時間を入力してください。<br>（スライダー下の「一般的な目安」は、あなたのライフスタイルに合わせた平均値です。）</p>
+
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="all">全体の家事</button>
+                    <button class="tab-button" data-tab="cooking">料理・食事関連</button>
+                    <button class="tab-button" data-tab="laundry">洗濯関連</button>
+                    <button class="tab-button" data-tab="cleaning">掃除関連</button>
+                    <button class="tab-button" data-tab="misc">その他</button>
+                </div>
+
+                <div id="choresTabContent">
+                    <div class="tab-pane active" id="tab-all">
+                        <div class="input-group">
+                            <label for="choresTimeSliderAll">全体の家事時間:</label>
+                            <div class="chores-slider-container">
+                                <div id="choresMarkAll" class="chores-slider-mark"></div>
+                                <input type="range" id="choresTimeSliderAll" min="0" max="60" value="10">
+                            </div>
+                            <p>週 <strong id="choresTimeDisplayAll">10時間</strong> <span class="chores-note" id="choresNoteAll">（一般的な目安）</span></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-cooking">
+                        <div class="input-group">
+                            <label for="choresTimeSliderCooking">料理・食事関連の家事時間:</label>
+                            <div class="chores-slider-container">
+                                <div id="choresMarkCooking" class="chores-slider-mark"></div>
+                                <input type="range" id="choresTimeSliderCooking" min="0" max="30" value="10">
+                            </div>
+                            <p>週 <strong id="choresTimeDisplayCooking">10時間</strong> <span class="chores-note" id="choresNoteCooking">（一般的な目安）</span></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-laundry">
+                        <div class="input-group">
+                            <label for="choresTimeSliderLaundry">洗濯関連の家事時間:</label>
+                            <div class="chores-slider-container">
+                                <div id="choresMarkLaundry" class="chores-slider-mark"></div>
+                                <input type="range" id="choresTimeSliderLaundry" min="0" max="20" value="5">
+                            </div>
+                            <p>週 <strong id="choresTimeDisplayLaundry">5時間</strong> <span class="chores-note" id="choresNoteLaundry">（一般的な目安）</span></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-cleaning">
+                        <div class="input-group">
+                            <label for="choresTimeSliderCleaning">掃除関連の家事時間:</label>
+                            <div class="chores-slider-container">
+                                <div id="choresMarkCleaning" class="chores-slider-mark"></div>
+                                <input type="range" id="choresTimeSliderCleaning" min="0" max="10" value="3">
+                            </div>
+                            <p>週 <strong id="choresTimeDisplayCleaning">3時間</strong> <span class="chores-note" id="choresNoteCleaning">（一般的な目安）</span></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-misc">
+                        <div class="input-group">
+                            <label for="choresTimeSliderMisc">その他の家事時間:</label>
+                            <div class="chores-slider-container">
+                                <div id="choresMarkMisc" class="chores-slider-mark"></div>
+                                <input type="range" id="choresTimeSliderMisc" min="0" max="10" value="2">
+                            </div>
+                            <p>週 <strong id="choresTimeDisplayMisc">2時間</strong> <span class="chores-note" id="choresNoteMisc">（一般的な目安）</span></p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <button id="calculateButton">計算する</button>
 
             <div class="result-area">
-                <p>あなたの今の時給は...</p>
-                <p class="hourly-wage" id="hourlyWageResult">0円</p>
-                <p class="note">※これは労働に対する対価です。しかし、家事や余暇の時間もあなたの人生の貴重な時間です。</p>
+                <p>あなたの時給は...</p>
+                <p class="hourly-wage" id="hourlyWageResult">---円</p>
+                <p class="note">※額面年収からの概算です。税金や社会保険料は考慮していません。</p>
             </div>
         </section>
 
-        <hr> <section class="suggestion-area">
-            <h3>生まれる余暇で、未来の時給UP！</h3>
-            <p>無駄をなくして、あなたの時間を投資に変えましょう。</p>
+        <hr>
 
-            <div id="itemSuggestions" class="item-list">
+        <section class="time-saving-visualizer">
+            <h3>「時給」を上げる時短アイテムの効果を視覚化</h3>
+            <p class="section-description">気になる時短アイテムの導入で、どれだけ家事時間を削減できるかを確認しましょう。</p>
+            <div id="timeSavingItemsContainer">
                 </div>
         </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2025 時給UPナビ All Rights Reserved.</p>
-    </footer>
+        <footer>
+            <p>&copy; 2025 時給UPナビ. All rights reserved.</p>
+        </footer>
+    </main>
 
     <script src="script.js"></script>
 </body>
